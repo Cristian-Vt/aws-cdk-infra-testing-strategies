@@ -1,4 +1,4 @@
-# Run Cheff Inspec Tests 
+# Run Chef Inspec Tests 
 
 ## Note:
 

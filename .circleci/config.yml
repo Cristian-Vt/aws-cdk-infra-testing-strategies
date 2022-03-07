@@ -30,16 +30,16 @@ jobs:
           paths:
             - node_modules
       - run: 
-          name: Run tests
+          name: Run cdk tests
           command: npm run test
       - run: 
           name: Deploy Stack
           command: npm run cdk
       - run: 
-          name: install cheff
+          name: install chef
           command: curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec
       - run:
-          name: run cheff
+          name: run chef tests
           command: |
             cd inspec_aws
             . run_inspec_test.sh
