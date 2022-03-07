@@ -1,0 +1,40 @@
+version: '2.1'
+
+executors:
+  node-image:
+    docker:
+      - image: cimg/node:14.10.1 
+orbs:
+  aws-cli: circleci/aws-cli@2.0
+  node: circleci/node@5.0.0
+jobs:
+  build:
+    docker:
+        - image: 'cimg/base:stable'
+    steps:
+      - aws-cli/install
+      - checkout
+      - node/install:
+          node-version: '16.13'
+      - restore_cache:
+          keys:
+            - node-deps-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+      - run:
+          name: install packages
+          command: npm ci
+      - run:
+          name: build
+          command: npm run build
+      - save_cache:
+          key: node-deps-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
+      - run: 
+          name: Run tests
+          command: npm run test
+
+workflows:
+  build:
+    jobs:
+      - build:
+          context: aws
