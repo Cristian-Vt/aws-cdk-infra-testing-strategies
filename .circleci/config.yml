@@ -38,6 +38,9 @@ jobs:
       - run: 
           name: install cheff
           command: curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec
+      - run:
+          name: run cheff
+          command: cd inspec_aws && . run_inspec_test.sh
       # - run: 
       #     name: Destroy Stack
       #     command: npm run cdk_destroy
