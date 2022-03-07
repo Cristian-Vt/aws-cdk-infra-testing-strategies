@@ -33,8 +33,11 @@ jobs:
           name: Run tests
           command: npm run test
       - run: 
-          name: Run tests
+          name: Deploy Stack
           command: npm run cdk
+       - run: 
+          name: Destroy Stack
+          command: npm run cdk_destroy
 
 workflows:
   build:
