@@ -32,6 +32,9 @@ jobs:
       - run: 
           name: Run tests
           command: npm run test
+      - run: 
+          name: Run tests
+          command: npm run cdk
 
 workflows:
   build:
